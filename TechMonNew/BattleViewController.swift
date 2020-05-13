@@ -14,6 +14,7 @@ class BattleViewController: UIViewController {
     @IBOutlet var playerImageView:UIImageView!
     @IBOutlet var playerHPLabel:UILabel!
     @IBOutlet var playerMPLabel:UILabel!
+    @IBOutlet var playerTPLabel:UILabel!
     
     @IBOutlet var enemyNameLabel:UILabel!
     @IBOutlet var enemyImageView:UIImageView!
@@ -64,17 +65,17 @@ class BattleViewController: UIViewController {
 
     @objc func updateGame(){
         player.currentMP += 1
-        if player.currentMP >= 20{
+        if player.currentMP >= player.maxMP{
             isPlayerAttackAvailable = true
-            player.currentMP = 20
+            player.currentMP = player.maxMP //MPはmaxMP以上にならないようにしなきゃだから、currentMPがmaxMPを超えてもmaxMPをキーぷ
         }else{
             isPlayerAttackAvailable = false
         }
         
         enemy.currentMP += 1
-        if enemy.currentMP >= 35{
+        if enemy.currentMP >= enemy.maxMP{
             enemyAttack()
-            enemy.currentMP = 0
+            enemy.currentMP = 0 //敵は自動で攻撃するから、攻撃のたびにcurrentMPを０に
         }
 
         updateUI()
@@ -84,7 +85,7 @@ class BattleViewController: UIViewController {
         techMonManager.damageAnimation(imageView: playerImageView)
         techMonManager.playSE(fileName: "SE_attack")
         
-        player.currentHP -= 20
+        player.currentHP -= enemy.attackPoint
         updateUI()
         
         judgeBattle()
@@ -115,7 +116,7 @@ class BattleViewController: UIViewController {
             techMonManager.damageAnimation(imageView: enemyImageView)
             techMonManager.playSE(fileName: "SE_attack")
             
-            enemy.currentHP -= 30
+            enemy.currentHP -= player.attackPoint
             player.currentMP = 0
             
             updateUI()
