@@ -22,10 +22,10 @@ class BattleViewController: UIViewController {
     
     let techMonManager = TechMonManager.shared
     
-    var playerHP = 100
-    var playerMP = 0
-    var enemyHP = 200
-    var enemyMP = 0
+//    var playerHP = 100
+//    var playerMP = 0
+//    var enemyHP = 200
+//    var enemyMP = 0
     
     var player: Character!
     var enemy: Character!
@@ -40,13 +40,11 @@ class BattleViewController: UIViewController {
         enemy  = techMonManager.enemy
         playerNameLabel.text = "勇者"
         playerImageView.image = UIImage(named: "yusya.png")
-        playerHPLabel.text = "\(playerHP) / 100"
-        playerMPLabel.text = "\(playerMP) / 20"
         
         enemyNameLabel.text = "鍵"
         enemyImageView.image = UIImage(named: "monster.png")
-        enemyHPLabel.text = "\(enemyHP) / 200"
-        enemyMPLabel.text = "\(enemyMP) / 35"
+
+        updateUI()
         
         gameTimer = Timer.scheduledTimer(timeInterval: 0.1,target: self,selector: #selector(updateGame),
                                          userInfo: nil, repeats: true)
@@ -59,40 +57,37 @@ class BattleViewController: UIViewController {
            techMonManager.playBGM(fileName: "BGM_battle001")
     }
        
-       override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
            super.viewWillDisappear(animated)
            techMonManager.stopBGM()
     }
 
     @objc func updateGame(){
-        playerMP += 1
-        if playerMP >= 20{
+        player.currentMP += 1
+        if player.currentMP >= 20{
             isPlayerAttackAvailable = true
-            playerMP = 20
+            player.currentMP = 20
         }else{
             isPlayerAttackAvailable = false
         }
         
-        enemyMP += 1
-        if enemyMP >= 35{
+        enemy.currentMP += 1
+        if enemy.currentMP >= 35{
             enemyAttack()
-            enemyMP = 0
+            enemy.currentMP = 0
         }
-        
-        playerMPLabel.text = "\(playerMP) / 20"
-        enemyMPLabel.text = "\(playerMP) / 35"
+
+        updateUI()
     }
     
     func enemyAttack(){
         techMonManager.damageAnimation(imageView: playerImageView)
         techMonManager.playSE(fileName: "SE_attack")
         
-        playerHP -= 20
-        playerHPLabel.text = "\(playerHP) / 100"
+        player.currentHP -= 20
+        updateUI()
         
-        if playerHP <= 0 {
-            finishBattle(vanishImageView: playerImageView, isPlayerwin: false)
-        }
+        judgeBattle()
     }
     func finishBattle(vanishImageView: UIImageView, isPlayerwin: Bool){
         techMonManager.vanishAnimation(imageView: vanishImageView)
@@ -120,15 +115,12 @@ class BattleViewController: UIViewController {
             techMonManager.damageAnimation(imageView: enemyImageView)
             techMonManager.playSE(fileName: "SE_attack")
             
-            enemyHP -= 30
-            playerMP = 0
+            enemy.currentHP -= 30
+            player.currentMP = 0
             
-            enemyHPLabel.text = "\(enemyHP) / 200"
-            playerMPLabel.text = "\(playerMP) / 20"
+            updateUI()
             
-            if enemyHP <= 0 {
-                finishBattle(vanishImageView: enemyImageView, isPlayerwin: true)
-            }
+            judgeBattle()
         }
     }
     //ステータスの反映メソッド
