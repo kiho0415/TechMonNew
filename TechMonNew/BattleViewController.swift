@@ -117,9 +117,38 @@ class BattleViewController: UIViewController {
             techMonManager.playSE(fileName: "SE_attack")
             
             enemy.currentHP -= player.attackPoint
+            player.currentTP += 10
+                if player.currentTP >= player.maxTP{
+                    player.currentTP = player.maxTP
+                }
             player.currentMP = 0
             
             updateUI()
+            
+            judgeBattle()
+        }
+    }
+    
+    @IBAction func tameruAction(){
+        techMonManager.playSE(fileName: "SE_charge")
+        player.currentTP += 40
+        if player.currentTP >= player.maxTP{
+            player.currentTP = player.maxTP
+        }
+        player.currentMP = 0
+    }
+    
+    @IBAction func fire(){
+        if isPlayerAttackAvailable && player.currentTP >= 40{
+            techMonManager.damageAnimation(imageView: enemyImageView)
+            techMonManager.playSE(fileName: "SE_fire")
+            
+            enemy.currentHP -= 100
+            player.currentTP -= 40
+            if player.currentTP <= 0{
+                player.currentTP = 0
+            }
+            player.currentMP = 0
             
             judgeBattle()
         }
@@ -128,7 +157,7 @@ class BattleViewController: UIViewController {
     func updateUI(){
         playerHPLabel.text = "\(player.currentHP) / \(player.maxHP) /"
         playerMPLabel.text = "\(player.currentMP) / \(player.maxMP) /"
-        
+        playerTPLabel.text = "\(player.currentTP) / \(player.maxTP) /"
         enemyHPLabel.text = "\(enemy.currentHP) / \(enemy.maxHP) /"
         enemyMPLabel.text = "\(enemy.currentMP) / \(enemy.maxMP) /"
     }
