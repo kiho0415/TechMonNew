@@ -28,25 +28,25 @@
                                 <rect key="frame" x="0.0" y="139" width="414" height="381"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jz7-4T-cfM">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="yusya.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jz7-4T-cfM">
                                 <rect key="frame" x="68" y="211" width="279" height="236"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFt-z6-4Y1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFt-z6-4Y1">
                                 <rect key="frame" x="20" y="160" width="118" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="MisakiGothic" family="MisakiGothic" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uge-Br-LYQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lv. 15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uge-Br-LYQ">
                                 <rect key="frame" x="296" y="164" width="118" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="MisakiGothic" family="MisakiGothic" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcq-PN-HvF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100 / 100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcq-PN-HvF">
                                 <rect key="frame" x="146" y="479" width="118" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="MisakiGothic" family="MisakiGothic" pointSize="20"/>
@@ -78,7 +78,7 @@
                     <connections>
                         <outlet property="nameLabal" destination="dFt-z6-4Y1" id="99b-ok-YiD"/>
                         <outlet property="staminaLabal" destination="Uge-Br-LYQ" id="Nsv-0B-IL3"/>
-                        <segue destination="Di4-YT-ViJ" kind="presentation" id="jry-DK-kEc"/>
+                        <segue destination="Di4-YT-ViJ" kind="presentation" identifier="toBattle" id="jry-DK-kEc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -104,6 +104,9 @@
                                 <state key="normal" title="こうげき" backgroundImage="gold_button.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="attackAction" destination="Di4-YT-ViJ" eventType="touchUpInside" id="ZbI-0J-trx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgD-7L-dVf">
                                 <rect key="frame" x="157" y="753" width="101" height="45"/>
@@ -231,6 +234,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="RZQ-Lz-pu2"/>
                     </view>
+                    <connections>
+                        <outlet property="enemyHPLabel" destination="Meq-P7-4eG" id="tQi-bW-8EA"/>
+                        <outlet property="enemyImageView" destination="ipe-mk-REF" id="3Td-gf-AJ5"/>
+                        <outlet property="enemyMPLabel" destination="1LD-xY-Hqg" id="nbB-8f-RGr"/>
+                        <outlet property="enemyNameLabel" destination="9tL-x9-MTx" id="O9b-Gt-ycC"/>
+                        <outlet property="playerHPLabel" destination="ghp-W3-5wV" id="gWJ-g9-dpM"/>
+                        <outlet property="playerImageView" destination="qPH-Lo-E4q" id="FQE-bn-ILQ"/>
+                        <outlet property="playerMPLabel" destination="ztT-vy-TxP" id="rUL-0E-vyi"/>
+                        <outlet property="playerNameLabel" destination="TOl-aM-svr" id="Yfy-T0-yhG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XgA-fc-DwB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -242,5 +255,6 @@
         <image name="bgimage.jpg" width="1280" height="960"/>
         <image name="gold_button.png" width="800" height="245"/>
         <image name="lobby.png" width="500" height="400"/>
+        <image name="yusya.png" width="56" height="56"/>
     </resources>
 </document>
