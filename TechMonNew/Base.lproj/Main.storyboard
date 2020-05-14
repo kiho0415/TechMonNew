@@ -77,7 +77,7 @@
                     </view>
                     <connections>
                         <outlet property="nameLabal" destination="dFt-z6-4Y1" id="99b-ok-YiD"/>
-                        <outlet property="staminaLabal" destination="Uge-Br-LYQ" id="Nsv-0B-IL3"/>
+                        <outlet property="staminaLabal" destination="xcq-PN-HvF" id="Wj7-8S-aN8"/>
                         <segue destination="Di4-YT-ViJ" kind="presentation" identifier="toBattle" id="jry-DK-kEc"/>
                     </connections>
                 </viewController>
